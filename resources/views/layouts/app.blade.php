@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'TU&TU')</title>
+
+    {{-- Solo CSS puro --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('styles')
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body>
 
     {{-- HEADER --}}
     @include('partials.header')
 
-    {{-- CONTENIDO PRINCIPAL --}}
-    <main class="min-h-screen">
+    {{-- CONTENIDO --}}
+    <main>
         @yield('content')
     </main>
 
