@@ -4,12 +4,10 @@
     <div class="container">
         <a href="{{ url('/') }}" class="logo">
             <img src="{{ asset('images/logo.png') }}" alt="Logo Tu&Tu">
-            <span>Tu&Tu</span>
         </a>
 
         <nav class="nav" id="desktop-nav">
             <a href="{{ url('/') }}">Inicio</a>
-            <a href="{{ url('/politica-de-privacidad') }}">Privacidad</a>
             <a href="{{ url('/politica-de-cookies') }}">Cookies</a>
             <a href="{{ url('/terminos-de-uso') }}">Términos</a>
             <a href="{{ url('./contact') }}">Contacto</a>
@@ -18,16 +16,16 @@
             <button id="theme-toggle" class="theme-toggle" type="button">🌙</button>
         </nav>
 
-        <button id="menu-btn" class="menu-btn" type="button">☰</button>
+        <button id="menu-btn" class="menu-btn">☰</button>
     </div>
 
-    <div class="mobile-nav" id="mobile-nav">
+    <nav class="mobile-nav" id="mobile-nav">
         <a href="{{ url('/') }}">Inicio</a>
         <a href="{{ url('/politica-de-privacidad') }}">Privacidad</a>
         <a href="{{ url('/politica-de-cookies') }}">Cookies</a>
         <a href="{{ url('/terminos-de-uso') }}">Términos</a>
         <a href="{{ url('/contacto') }}">Contacto</a>
-    </div>
+    </nav>
 </header>
 
 <script>
@@ -36,14 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileNav = document.getElementById("mobile-nav");
   const themeBtn = document.getElementById("theme-toggle");
 
-  // Menú móvil
   menuBtn.addEventListener("click", () => {
     mobileNav.classList.toggle("show");
   });
 
-  // Toggle de tema oscuro / claro
-  themeBtn.addEventListener("click", (e) => {
-    e.preventDefault(); // evita cualquier comportamiento predeterminado
+  themeBtn.addEventListener("click", () => {
     document.body.classList.toggle("light");
     themeBtn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
   });
