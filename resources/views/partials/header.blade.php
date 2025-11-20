@@ -8,9 +8,9 @@
 
         <nav class="nav" id="desktop-nav">
             <a href="{{ url('/') }}">Inicio</a>
-            <a href="{{ url('/politica-de-cookies') }}">Cookies</a>
-            <a href="{{ url('/terminos-de-uso') }}">Términos</a>
-            <a href="{{ url('./contact') }}">Contacto</a>
+            <a href="{{ url('/cookies') }}">Cookies</a>
+            <a href="{{ url('/terminos') }}">Términos</a>
+            <a href="{{ url('/contact') }}">Contacto</a>
             <a href="https://drive.google.com/file/d/1tBf98K3ByT80OqORRWKhyLw91uqaJhgu/view?usp=sharing" target="_blank" class="btn">Guía Familias</a>
             <a href="https://drive.google.com/file/d/1ffCtl9ggzllQAJgyE1uXM78YeGhl9jlg/view?usp=sharing" target="_blank" class="btn">PDF Inversores</a>
             <button id="theme-toggle" class="theme-toggle" type="button">🌙</button>
@@ -22,7 +22,7 @@
     <nav class="mobile-nav" id="mobile-nav">
         <a href="{{ url('/') }}">Inicio</a>
         <a href="{{ url('/politica-de-privacidad') }}">Privacidad</a>
-        <a href="{{ url('/politica-de-cookies') }}">Cookies</a>
+        <a href="{{ url('/cookies') }}">Cookies</a>
         <a href="{{ url('/terminos-de-uso') }}">Términos</a>
         <a href="{{ url('/contacto') }}">Contacto</a>
     </nav>

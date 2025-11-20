@@ -29,7 +29,7 @@
                     <a href="/politica-de-privacidad">Política de privacidad</a>
                     <a href="/terminos-de-uso">Términos de uso</a>
                     <a href="#">Cookies</a>
-                     <a href="#">Privacidad</a>
+                    <a href="{{ url('/privacidad') }}">Privacidad</a>
 
                 </nav>
             </div>
