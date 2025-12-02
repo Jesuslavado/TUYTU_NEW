@@ -1,11 +1,88 @@
+/* ===== Nuevas Animaciones clave para efectos avanzados ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animación para el contenedor principal: rotación sutil en idle */
+@keyframes containerIdleTilt {
+    0%, 100% { transform: rotateX(0deg) rotateY(0deg) translateZ(0); }
+    50% { transform: rotateX(1deg) rotateY(-1deg) translateZ(5px); }
+}
+
+/* 🌟 NUEVA ANIMACIÓN PARA EL LOGO 3D SIMULADO 🌟 */
+@keyframes logoSimulated3DRotate {
+    0% { transform: rotateY(0deg) rotateX(0deg); }
+    25% { transform: rotateY(90deg) rotateX(10deg); } /* Gira y se inclina */
+    50% { transform: rotateY(180deg) rotateX(0deg); } /* Muestra la "cara trasera" simulada */
+    75% { transform: rotateY(270deg) rotateX(-10deg); } /* Gira y se inclina en la otra dirección */
+    100% { transform: rotateY(360deg) rotateX(0deg); }
+}
+
+
+/* Animación para el movimiento de partículas de fondo */
+@keyframes moveParticles {
+    0% { transform: translateZ(0px); }
+    100% { transform: translateZ(-200px); }
+}
+
+/* ===== Sección de contacto mejorada con efectos avanzados ===== */
 .contact-section {
     min-height: 100vh;
     padding: 4rem 1.5rem;
-    background: linear-gradient(to bottom right, #051428, rgba(13,35,71,0.7), rgba(13,35,71,0.5));
+    position: relative;
+    overflow: hidden; /* Oculta el overflow para las partículas */
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(to bottom right, #051428, rgba(13,35,71,0.7), rgba(13,35,71,0.5));
+    perspective: 2000px; /* Aumenta la perspectiva para más dramatismo */
 }
+
+/* Añadimos el gradiente animado y un patrón de malla futurista */
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 15% 50%, rgba(71, 164, 255, 0.1) 0%, transparent 80%),
+        radial-gradient(circle at 85% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 80%),
+        linear-gradient(135deg, 
+            rgba(5, 20, 40, 0.2) 0%, 
+            rgba(13, 35, 71, 0.4) 50%, 
+            rgba(26, 60, 120, 0.3) 100%);
+    background-size: 400% 400%, 100% 100%; /* Ajuste para el gradiente y el radial */
+    animation: gradientShift 18s ease infinite;
+    z-index: -1;
+}
+
+/* 🌟 Sistema de partículas 3D en el fondo 🌟 */
+.contact-section::after {
+    content: '';
+    position: absolute;
+    width: 300px; /* Tamaño del campo de partículas */
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(70deg); /* Inclinación para vista isométrica */
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px; /* Espaciado de las partículas */
+    animation: moveParticles 60s linear infinite; /* Animación de movimiento en Z */
+    transform-style: preserve-3d;
+    pointer-events: none; /* No interfieren con clics */
+    z-index: -2;
+    opacity: 0.8;
+}
+
 
 .contact-container {
     display: grid;
@@ -13,73 +90,197 @@
     gap: 2.5rem;
     max-width: 1200px;
     width: 100%;
-    background: rgba(255,255,255,0.05);
+    
+    /* 🌟 Efecto Glassmorphism avanzado con mayor profundidad 🌟 */
+    background: rgba(255,255,255,0.02); /* Muy sutil, casi invisible */
     border-radius: 2rem;
-    padding: 2.5rem;
-    backdrop-filter: blur(20px);
+    padding: 3.5rem; /* Más espacio */
+    backdrop-filter: blur(40px) saturate(1.8); /* Mayor desenfoque y saturación */
+    -webkit-backdrop-filter: blur(40px) saturate(1.8);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Borde más definido */
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5), /* Sombra principal */
+        0 0 80px rgba(71, 164, 255, 0.1); /* Brillo suave azul */
+    
+    opacity: 0;
+    transform: translateY(50px) rotateX(10deg); /* Animación de entrada con rotación */
+    animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.3, 1) forwards 0.4s,
+               containerIdleTilt 15s ease-in-out infinite alternate; /* Rotación sutil en idle */
+    
+    transform-style: preserve-3d; /* Esencial para los elementos internos */
+    transform-origin: center;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15), 
+                box-shadow 0.6s ease;
+    will-change: transform, box-shadow;
 }
 
-@media(min-width: 1024px) {
-    .contact-container {
-        grid-template-columns: repeat(2, 1fr);
+/* Hover: El panel se inclina y se eleva para mostrar su volumen */
+@media (hover: hover) and (pointer: fine) {
+    .contact-container:hover {
+        transform: translateY(0px) rotateX(0deg) rotateY(0deg) scale(1.01) translateZ(10px);
+        box-shadow: 
+            0 25px 80px rgba(0, 0, 0, 0.7), 
+            0 0 100px rgba(71, 164, 255, 0.3);
     }
 }
 
+@media (min-width: 1024px) {
+    .contact-container {
+        grid-template-columns: 1.5fr 1fr;
+    }
+}
+
+/* 🌟 Tarjetas de Información Flotantes 🌟 */
 .contact-info {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    padding: 1.5rem; /* Padding interno para las "tarjetas" */
+    background: rgba(255,255,255,0.01); /* Fondo muy tenue */
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transform: translateZ(30px) rotateY(-2deg); /* Elevado y ligeramente inclinado */
+    transition: transform 0.4s ease-out;
+}
+
+.contact-info:hover {
+    transform: translateZ(40px) rotateY(0deg); /* Se eleva y se endereza */
+}
+
+/* Aplicar transformaciones 3D a cada elemento de info */
+.contact-title, .contact-description, .contact-email, .contact-socials {
+    transform: translateZ(10px); /* Ligeramente empujados hacia adelante */
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 .contact-title {
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 3.2rem; /* Más grande */
+    font-weight: 900; /* Extra bold */
     color: #47a4ff;
+    text-shadow: 0 0 10px rgba(71, 164, 255, 0.5); /* Sutil brillo para el texto */
+    animation-delay: 0.6s;
 }
 
 .contact-description {
-    font-size: 1.125rem;
-    color: #d1d5db;
-    line-height: 1.6;
+    font-size: 1.15rem;
+    color: #c0c0c0; /* Un poco más claro */
+    line-height: 1.8; /* Más espacio entre líneas */
+    animation-delay: 0.8s;
 }
 
 .contact-email {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.125rem;
+    gap: 0.75rem; /* Más espacio */
+    font-size: 1.15rem;
     color: #fff;
+    padding-top: 1rem; /* Más separación */
+    animation-delay: 1s;
 }
 
+/* ===== Redes Sociales: Efecto de "presión" 3D en hover ===== */
 .contact-socials {
     display: flex;
-    gap: 1rem;
-    padding-top: 1rem;
+    gap: 1.2rem; /* Más espacio entre iconos */
+    padding-top: 1.5rem;
+    animation-delay: 1.2s;
 }
 
 .social-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s;
+    width: 52px; /* Ligeramente más grandes */
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(71, 164, 255, 0.1); /* Fondo más sutil */
+    color: #fff;
+    
+    border: 1px solid rgba(71, 164, 255, 0.3); /* Borde sutil */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 
+                0 0 10px rgba(71, 164, 255, 0.2); /* Sombra y brillo base */
+    
+    transition: all 0.3s ease-in-out;
+    transform-style: preserve-3d;
+    transform: translateZ(0); /* Base para el efecto 3D */
 }
 
 .social-link:hover {
-    transform: scale(1.1);
+    /* 🌟 Efecto de "presión" 3D: se escala, se inclina y se "hunde" 🌟 */
+    transform: scale(1.1) rotateX(5deg) rotateY(5deg) translateZ(-5px); 
+    background: rgba(71, 164, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(71, 164, 255, 0.6); /* Brillo más intenso */
+}
+
+.social-link:active {
+    transform: scale(0.95) translateZ(-10px); /* Se presiona más profundo */
 }
 
 .icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.7rem; /* Iconos más grandes */
+    height: 1.7rem;
+    transition: transform 0.3s ease;
 }
 
+.social-link:hover .icon {
+    transform: rotate(360deg); /* La rotación 360 del icono interior */
+}
+
+/* Mantener colores originales de los iconos SVG */
+.social-link svg path[fill="#E1306C"] { fill: #E1306C; }
+.social-link svg path[fill="#0077B5"] { fill: #0077B5; }
+.contact-email svg path[fill="#EA4335"] { fill: #EA4335; }
+
+
+/* ===== Logo con efecto 3D simulado ("con relleno") ===== */
 .contact-logo {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 1rem;
+    opacity: 0;
+    animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.3, 1) forwards 1.4s;
+    
+    transform-style: preserve-3d;
+    transform: translateZ(50px); /* Más elevado */
 }
 
-.contact-logo img {
-    width: 16rem;
-    height: auto;
+.logo-3d-wrapper {
+    position: relative;
+    width: 18rem; /* Tamaño base del logo */
+    height: 18rem; /* Ajustar según tu logo si no es cuadrado */
+    transform-style: preserve-3d;
+    animation: logoSimulated3DRotate 20s linear infinite; /* Animación de rotación 3D */
+    transform-origin: center;
 }
+
+.logo-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Oculta la parte trasera de las imágenes */
+    filter: drop-shadow(0 0 25px rgba(71, 164, 255, 0.6)); /* Brillo base */
+}
+
+.layer-front {
+    transform: translateZ(5px); /* Capa frontal ligeramente más cerca */
+    filter: drop-shadow(0 0 35px rgba(71, 164, 255, 0.8)); /* Más brillo frontal */
+}
+
+.layer-back {
+    transform: translateZ(-5px) rotateY(180deg); /* Capa trasera más lejos y girada para verse cuando el wrapper gire */
+    filter: drop-shadow(0 0 15px rgba(71, 164, 255, 0.4)) brightness(0.8); /* Menos brillo, más oscura la "cara trasera" */
+}
+
+.layer-shadow {
+    transform: translateZ(-15px) translateX(5px) translateY(5px); /* Capa de sombra detrás */
+    filter: blur(8px) brightness(0.1); /* Efecto de sombra difusa */
+    opacity: 0.8;
+}
+
+

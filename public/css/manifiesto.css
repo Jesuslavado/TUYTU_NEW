@@ -1,0 +1,215 @@
+:root {
+    --bg: #0d1117;           /* Fondo muy oscuro (ciberespacio) */
+    --heading: #58a6ff;      /* Azul Neón principal */
+    --heading-color: #0077ff; /* Azul más fuerte para contraste */
+    --link-color: #0077ff;
+    
+}
+
+/* ======================================================== */
+/* 🌧️ EFECTO DE LLUVIA DE PUNTOS/BURBUJAS (Mantenido) */
+/* ======================================================== */
+body[data-theme="dark"] {
+    --bg: #0d1117;           /* Fondo muy oscuro (ciberespacio) */
+    --text: #c9d1d9;         /* Texto claro */
+    --heading: #58a6ff;      /* Azul Neón principal */
+    --link: #58a6ff;
+    --text-muted: #8b949e;
+    --box-bg: rgba(31, 41, 55, 0.9); /* Caja semitransparente oscura */
+    --box-border: #30363d;
+    --glow-color: rgba(88, 166, 255, 0.4); /* Color de brillo neón */
+}
+
+/* * --- Variables de Tema (Light Mode - Activado por data-theme="light") --- 
+ * **CAMBIO IMPORTANTE:** Aplicamos el tema claro al body para que el fondo cambie.
+ */
+body[data-theme="light"] {
+    --bg: #0d1117;           /* Fondo muy oscuro (ciberespacio) */
+    --text: #242525;         /* Texto claro */
+    --heading: #58a6ff;      /* Azul Neón principal */
+    --link: #58a6ff;
+    --text-muted: #8b949e;
+    --box-bg: rgba(187, 195, 204, 0.9); /* Caja semitransparente oscura */
+    --box-border: #30363d;
+    --glow-color: rgba(88, 166, 255, 0.4); /* Color de brillo neón */
+}
+
+
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Usa el color de --heading para el efecto de neón de la lluvia */
+    background: 
+        radial-gradient(circle, rgba(88, 166, 255, 0.15) 1px, transparent 1px),
+        radial-gradient(circle, rgba(88, 166, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle, rgba(88, 166, 255, 0.2) 1px, transparent 1px);
+    
+    background-size: 80px 80px, 60px 60px, 120px 120px; 
+    opacity: 0.8;
+    z-index: -1;
+    animation: rainEffect 15s linear infinite; 
+}
+
+@keyframes rainEffect {
+    from {
+        background-position: 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position:
+            3000px 3000px, 
+            -2000px -2000px,
+            4000px 4000px;
+    }
+}
+
+/* ======================================================== */
+/* 🖥️ ESTRUCTURA Y ENCABEZADOS (Combinando Reglas) */
+/* ======================================================== */
+
+.page-container {
+    max-width: 900px; /* Regla de Target CSS */
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: transparent; /* Mantiene la lluvia visible */
+    color: var(--text);
+}
+
+.header {
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--glass-border); 
+    margin-bottom: 50px;
+    text-shadow: 0 0 10px var(--shadow-color);
+}
+
+.header h1 {
+    font-size: 48px;
+    color: var(--heading-color);
+    margin-bottom: 5px;
+    transition: color 0.5s ease;
+}
+
+.content section {
+    margin-top: 100px; /* MUCHO espacio entre las gotas (Regla de Source CSS) */
+}
+
+/* --- CAJAS DE PÁRRAFOS (ESTILO BURBUJA DESORDENADA) --- */
+.box {
+    padding: 30px 40px; /* Padding de burbuja (Source CSS) */
+    border-radius: 90px; /* Forma de burbuja (Source CSS) */
+    border: 1px solid var(--box-border);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); 
+    max-width: 600px; 
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    position: relative; 
+    z-index: 1; 
+}
+
+/* Aplicar Desorden PERMANENTE (Source CSS) */
+.box:nth-child(odd) {
+    transform: rotate(2deg) translateX(-70px); 
+    margin-left: auto; 
+    margin-right: 0; 
+}
+
+.box:nth-child(even) {
+    transform: rotate(-2deg) translateX(70px); 
+    margin-right: auto; 
+    margin-left: 0; 
+}
+
+.box:hover {
+    transform: rotate(0deg) scale(1.03); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.box p,
+.box li {
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.box ul {
+    padding-left: 20px;
+}
+
+a {
+    color: var(--link);
+}
+a:hover {
+    opacity: .8;
+}
+
+.update {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* --- FLOATING ANIMATION (CAÓTICA entrada y salida - Source CSS) --- */
+.floating-box {
+    opacity: 0;
+    /* Comienzo de la animación: lejos y pequeño */
+    transform: translateY(150px) scale(0.7); 
+    transition: all 1.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    position: relative;
+    transition-property: opacity, transform;
+}
+
+/* Movimiento de entrada ASIMÉTRICO y fuerte rotación inicial */
+.floating-box:nth-child(odd) {
+    transform: translateY(150px) translateX(-200px) rotate(-15deg) scale(0.7);
+}
+
+.floating-box:nth-child(even) {
+    transform: translateY(150px) translateX(200px) rotate(15deg) scale(0.7);
+}
+
+.floating-box.show {
+    opacity: 1;
+}
+
+.floating-box:nth-child(odd).show {
+    /* Estado final (coincide con el desorden permanente) */
+    transform: translateY(0) rotate(2deg) translateX(-70px) scale(1); 
+}
+
+.floating-box:nth-child(even).show {
+    /* Estado final (coincide con el desorden permanente) */
+    transform: translateY(0) rotate(-2deg) translateX(70px) scale(1); 
+}
+
+/* --- MANIFIESTO FINAL (Burbuja grande - Reglas de Target CSS) --- */
+.manifesto-final {
+    text-align: center;
+    font-weight: 700;
+    color: var(--heading);
+    padding: 32px 24px; /* Padding de Target CSS */
+    margin: 40px auto 0;
+    max-width: 600px;
+    border-radius: 60px 20px 50px 30px; /* Asimetría de Target CSS */
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.1),
+        /* Uso de rgba(255, 255, 255, 0.2) en lugar de una variable */
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2); 
+    transform: rotate(-0.8deg); /* Ligera inclinación de Target CSS */
+    transition: transform 0.4s ease-out; 
+    position: relative; 
+    z-index: 1; 
+}
+
+.manifesto-final:hover {
+    transform: rotate(0); /* Vuelve a la normalidad al hacer hover */
+}
+
+.manifesto-final p {
+    margin: 12px 0;
+    font-size: 19px;
+    line-height: 1.5;
+}

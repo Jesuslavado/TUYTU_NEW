@@ -135,7 +135,6 @@
                     Si consideras que tus derechos no han sido atendidos correctamente, puedes presentar una reclamación ante la  
                     Agencia Española de Protección de Datos: <a href="https://www.aepd.es" target="_blank">www.aepd.es</a>.
                 </p>
-                <p class="update">Última actualización: 14 de julio de 2025</p>
             </div>
         </section>
 

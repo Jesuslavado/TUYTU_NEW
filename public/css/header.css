@@ -39,6 +39,7 @@ body.light {
 body.light .site-header {
   background: rgba(255, 255, 255, 0.65);
   border-color: rgba(0, 0, 0, 0.08);
+  
 }
 
 /* CONTENEDOR */
@@ -176,5 +177,5 @@ body.light .site-header {
 }
 /* Acercar el logo al menú */
 .logo {
-  margin-left: 240px; /* Ajusta este valor según lo necesites */
+  margin-left: 280px; /* Ajusta este valor según lo necesites */
 }

@@ -9,10 +9,11 @@
         <nav class="nav" id="desktop-nav">
             <a href="{{ url('/') }}">Inicio</a>
             <a href="{{ url('/cookies') }}">Cookies</a>
-            <a href="{{ url('/terminos') }}">Términos</a>
             <a href="{{ url('/contact') }}">Contacto</a>
+            <a href="{{ url('/manifesto') }}">Manifiesto</a>
             <a href="https://drive.google.com/file/d/1tBf98K3ByT80OqORRWKhyLw91uqaJhgu/view?usp=sharing" target="_blank" class="btn">Guía Familias</a>
             <a href="https://drive.google.com/file/d/1ffCtl9ggzllQAJgyE1uXM78YeGhl9jlg/view?usp=sharing" target="_blank" class="btn">PDF Inversores</a>
+
             <button id="theme-toggle" class="theme-toggle" type="button">🌙</button>
         </nav>
 
@@ -25,22 +26,43 @@
         <a href="{{ url('/cookies') }}">Cookies</a>
         <a href="{{ url('/terminos-de-uso') }}">Términos</a>
         <a href="{{ url('/contacto') }}">Contacto</a>
+        <a href="{{ url('/manifesto') }}">Manifiesto</a>
     </nav>
 </header>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const themeBtn = document.getElementById("theme-toggle");
   const menuBtn = document.getElementById("menu-btn");
   const mobileNav = document.getElementById("mobile-nav");
-  const themeBtn = document.getElementById("theme-toggle");
 
+  // --- Recuperar tema guardado ---
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light");
+    themeBtn.textContent = "☀️";
+  } else {
+    document.body.classList.remove("light");
+    themeBtn.textContent = "🌙";
+  }
+
+  // --- Botón menú móvil ---
   menuBtn.addEventListener("click", () => {
     mobileNav.classList.toggle("show");
   });
 
+  // --- Cambiar tema y guardarlo ---
   themeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-    themeBtn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
+    const isLight = document.body.classList.toggle("light");
+
+    if (isLight) {
+      themeBtn.textContent = "☀️";
+      localStorage.setItem("theme", "light");
+    } else {
+      themeBtn.textContent = "🌙";
+      localStorage.setItem("theme", "dark");
+    }
   });
 });
 </script>
+

@@ -21,3 +21,6 @@ Route::get('/terminos', function () {
 Route::get('/privacidad', function () {
     return view('NotRegister.privacidad');
 });
+Route::get('/manifesto', function () {
+    return view('NotRegister.manifiesto');
+});

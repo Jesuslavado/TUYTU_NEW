@@ -96,7 +96,6 @@
                     se someterán a los Juzgados y Tribunales de Madrid, España, con renuncia expresa a cualquier otro fuero que pudiera 
                     corresponderles.
                 </p>
-                <p class="update">Última actualización: 14 de julio de 2025</p>
             </div>
         </section>
 

@@ -1,56 +1,179 @@
+/*
+ * =======================================================
+ * CÓDIGO CSS COMPLETO (CORREGIDO PARA EL CAMBIO DE TEMA)
+ * =======================================================
+ */
+
+/* --- Variables Globales (Disponibles en todos los temas) --- */
+:root {
+    /* Colores base, basados en tu código de contacto */
+    --color-primary: #47a4ff;
+    --color-primary-dark: #051428;
+    --glass-border: rgba(0, 119, 255, 0.2);
+    --shadow-color: rgba(0, 119, 255, 0.1);
+    --heading-color: #0077ff; /* Azul más fuerte para contraste */
+    --link-color: #0077ff;
+}
+
+/* * --- Variables de Tema (Dark Mode - Predeterminado) y Estilos Globales ---
+ * Estas variables se aplican al body por defecto.
+ */
+body[data-theme="dark"] {
+    /* Variables de Tema Oscuro (DEFAULT) */
+    --bg-color: var(--color-primary-dark);
+    --text-color: #c0c0c0;
+
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --text-strong: #fff;
+}
+
+/* * --- Variables de Tema (Light Mode - Activado por data-theme="light") --- 
+ * **CAMBIO IMPORTANTE:** Aplicamos el tema claro al body para que el fondo cambie.
+ */
+body[data-theme="light"] {
+    /* Fondo Claro y Texto Oscuro */
+    --bg-color: #f5f7fa;
+    --text-color: #070707;
+    --glass-bg: rgba(255, 255, 255, 0.85); /* Fondo de cristal más opaco */
+    --text-strong: #000;
+}
+
+
+/* --- Canvas 3D (Fondo Fijo) --- */
+#threejs-background {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; 
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* --- Contenedor de Página (Encima del 3D) --- */
 .page-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 40px 20px;
-    background: var(--bg);
-    color: var(--text);
+    padding: 60px 20px 100px; /* Padding suficiente para todos los dispositivos */
+    background: transparent;
+    color: var(--text-color); /* Hereda el color del body */
+    position: relative; 
+    z-index: 1; 
+    perspective: 1000px;
+    /* **IMPORTANTE:** Transición de color eliminada, ahora la maneja el body */
+}
+
+/* --- Elementos Parallax --- */
+.parallax-item {
+    padding: 10px;
+    margin-top: 40px;
+    will-change: transform; 
+    transition: transform 0.1s ease-out; 
+    z-index: 5;
 }
 
 .header {
     text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #d3d3d3;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--glass-border); 
+    margin-bottom: 50px;
+    text-shadow: 0 0 10px var(--shadow-color);
 }
 
 .header h1 {
-    font-size: 36px;
-    color: var(--heading);
+    font-size: 48px;
+    color: var(--heading-color);
     margin-bottom: 5px;
+    transition: color 0.5s ease;
 }
 
-.header .date {
-    font-size: 14px;
-    color: var(--text-muted);
+/* --- Responsividad Móvil --- */
+@media (max-width: 640px) {
+    .header h1 {
+        font-size: 32px;
+    }
+    .content h2 {
+        font-size: 24px;
+    }
+    .content h3 {
+        font-size: 18px;
+    }
+    .page-container {
+        padding: 40px 15px 80px;
+    }
 }
 
-.content section {
-    margin-top: 40px;
-}
 
+/* --- Cajas de Contenido (Glassmorphism) --- */
 .content h2 {
-    font-size: 24px;
-    color: var(--heading);
+    font-size: 28px;
+    color: var(--heading-color);
     margin-bottom: 15px;
+    text-shadow: 0 0 5px var(--shadow-color);
+    transition: color 0.5s ease;
 }
 
 .content h3 {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 8px;
     color: var(--text-strong);
 }
 
-.box {
-    background: var(--box-bg);
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--box-border);
-    margin-bottom: 20px;
+/* Quitando el grid en pantallas pequeñas, dejando los boxes en pila */
+.box-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+
+/* Volviendo al grid en pantallas medianas y grandes */
+@media (min-width: 768px) {
+    .box-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+
+.box {
+    background: var(--glass-bg);
+    padding: 25px;
+    border-radius: 15px; 
+    border: 1px solid var(--glass-border);
+    margin-bottom: 0;
+    
+    /* El truco del Glassmorphism */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 0 0 10px var(--shadow-color);
+    
+    transition: all 0.3s ease, border-color 0.5s ease;
+    transform-style: preserve-3d;
+}
+
+.box:hover {
+    /* Animación de elevación en hover */
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--shadow-color);
+    border-color: var(--heading-color);
+}
+
+/* Evitar el efecto hover en dispositivos táctiles */
+@media (hover: none) {
+    .box:hover {
+        transform: none;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 0 0 10px var(--shadow-color);
+        border-color: var(--glass-border);
+    }
+}
+
 
 .box p,
 .box li {
-    color: var(--text);
-    line-height: 1.6;
+    color: var(--text-color);
+    line-height: 1.7;
 }
 
 .box ul {
@@ -58,14 +181,11 @@
 }
 
 a {
-    color: var(--link);
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.5s ease;
 }
 a:hover {
-    opacity: .8;
-}
-
-.update {
-    margin-top: 10px;
-    font-size: 13px;
-    color: var(--text-muted);
+    color: var(--heading-color);
+    text-decoration: underline;
 }

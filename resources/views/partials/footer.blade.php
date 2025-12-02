@@ -25,12 +25,8 @@
             <div class="footer-section">
                 <h3 class="footer-title">Recursos</h3>
                 <nav class="footer-links">
-                    <a href="#">Guía para familias</a>
-                    <a href="/politica-de-privacidad">Política de privacidad</a>
-                    <a href="/terminos-de-uso">Términos de uso</a>
-                    <a href="#">Cookies</a>
-                    <a href="{{ url('/privacidad') }}">Privacidad</a>
-
+                    <a href="{{ url('/privacidad') }}">Política de privacidad</a>
+                    <a href="{{ url('/terminos') }}">Términos de uso</a>
                 </nav>
             </div>
 
@@ -40,7 +36,7 @@
                 <nav class="footer-links">
                     <a href="#">Discord</a>
                     <a href="#">X (Twitter)</a>
-                    <a href="#">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/tuytu-tech-04a075378/">LinkedIn</a>
                     <a href="#">GitHub</a>
                 </nav>
             </div>
@@ -49,14 +45,13 @@
         <!-- Bottom Bar -->
         <div class="footer-bottom">
             <div class="footer-bottom-left">
-                <p class="footer-copy">© 2025 Tu&Tu. Protegiendo la infancia digital.</p>
-                <p class="footer-subcopy">Hecho con ❤️ para un internet más seguro</p>
+                <p class="footer-subcopy">Creado con pasión y responsabilidad para un internet más seguro.</p>
             </div>
 
             <div class="footer-status">
                 <div class="status-indicator">
-                    <div class="status-dot"></div>
-                    <span class="status-text">Sistema activo</span>
+                    <div class=""></div>
+                    <p class="footer-copy">© 2025 Tu&Tu. Protegiendo la infancia digital.</p>
                 </div>
             </div>
         </div>
